@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     private boolean bool = false;
+    private boolean gamestart = false;
 
 
     void Hello(Map map){
@@ -52,7 +53,19 @@ public class Main {
         return this.bool;
     }
 
-    void look(Map map, Player pc){
+    boolean getgame(){
+        return this.gamestart;
+    }
+
+    void gamestart() {
+        this.gamestart = true;
+    }
+    
+    void endgame() {
+        this.bool = true;
+    }
+
+    void look(Map map, Player pc, Bot bot){
         int x = -2;
         int i = -2;
         int loc = 0;
@@ -78,6 +91,9 @@ public class Main {
                 if (x == 0 && i == 0) {
                     line[loc] = 'P';
                 }
+                else if (bot.GetLocalex() == xloc + i && bot.GetLocaley() == yloc + x) {
+                    line[loc] = 'B';
+                }
                 if (i == 2) {
                     String outline = new String(line);
                     System.out.println(outline);
@@ -91,46 +107,104 @@ public class Main {
     
 
     public static void main(String[] args) throws FileNotFoundException {
-        Map map1 = new Map("Map1.txt");
-        if (map1.GetBool() == false){
-            return;
-        }
-        Player pc = new Player(map1, map1.GetLength(), map1.GetHeight());
-        Main main = new Main();
+            Main main = new Main();
+            Scanner input = new Scanner(System.in);
+            String mapname = "";
+            int type = 9;
+            while (main.getgame() == false){
+                System.out.println("Dungeon of Doom");
+                System.out.println("Press enter to start:");
+                input.nextLine();
+                main.gamestart();
+                int hold = 0;
+                while (hold == 0){
+                    System.out.println("Choose your map:");
+                    System.out.println("0 Custom Map");
+                    System.out.println("1: Basic Map");
+                    System.out.println("2: Maze of Mystery");
+                    String mapin = input.nextLine();
+                    if (mapin.contentEquals("1") == true){
+                        mapname = "BasicMap.txt";
+                        hold = 1;
+                    }
+                    else if (mapin.contentEquals("2") == true) {
+                        mapname = "MazeoMystery.txt";
+                        hold = 1;
+                    }
+                    else if (mapin.contentEquals("0") == true) {
+                        System.out.println("Please enter filename including .txt");
+                        mapname = input.nextLine();
+                        hold = 1;
+                    }
+                    else {
+                        System.out.println("Incorrect Input");
+                    }
+                }
+                System.out.println("Bot on? Y or N");
+                String boton = input.nextLine();
+                if (boton.charAt(0) == 'Y') {
+                    type = 0;
+                }
+                else {
+                    type = 9;
+                }
+                System.out.println("Game Start");
 
-        Scanner input = new Scanner(System.in);
+            }
+            Map map1 = new Map(mapname);
+            if (map1.GetBool() == false){
+                input.close();
+                return;
+            }
+            Player pc = new Player(map1, map1.GetLength(), map1.GetHeight());
+            Bot bot = new Bot(type,map1.GetLength(),map1.GetHeight(),map1,pc,main);
+            
 
-        while (main.getbool() == false) {
-            //map1.PrintWholeMap(pc); FOR TESTING
-            String y = input.nextLine();
-            if (y.contentEquals("MOVE N") == true || y.contentEquals("MOVE W") == true || y.contentEquals("MOVE S") == true || y.contentEquals("MOVE E") == true) {
-                char z = y.charAt(5);
-                pc.Move(z, map1);
-            }
-            else if(y.contentEquals("HELLO") == true){
-                main.Hello(map1);
-            }
-            else if(y.contentEquals("GOLD") == true){
-                main.gold(pc);
-            }
-            else if (y.contentEquals("PICKUP") == true){
-                main.pickup(map1,pc,main);
-            }
-            else if (y.contentEquals("QUIT") == true) {
-                main.quit(map1,pc);
-            }
-            else if (y.contentEquals("LOOK") == true) {
-                main.look(map1,pc);
-            }
-            else {
-                System.out.println("Incorrect Input");
+            while (main.getbool() == false) {
+                //map1.PrintWholeMap(pc); FOR TESTING
+                String y = input.nextLine();
+                if (y.contentEquals("MOVE N") == true || y.contentEquals("MOVE W") == true || y.contentEquals("MOVE S") == true || y.contentEquals("MOVE E") == true) {
+                    char z = y.charAt(5);
+                    pc.Move(z, map1,1);
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                }
+                else if(y.contentEquals("HELLO") == true){
+                    main.Hello(map1);
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                }
+                else if(y.contentEquals("GOLD") == true){
+                    main.gold(pc);
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                }
+                else if (y.contentEquals("PICKUP") == true){
+                    main.pickup(map1,pc,main);
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                }
+                else if (y.contentEquals("QUIT") == true) {
+                    main.quit(map1,pc);
+                }
+                else if (y.contentEquals("LOOK") == true) {
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                    main.look(map1,pc,bot);
+                }
+                else {
+                    System.out.println("Incorrect Input");
+                    bot.Movement(map1,pc);
+                    bot.UpdateBot(map1,pc,main);
+                }
+                
+
             }
 
-        }
-
-        System.out.println("Press enter to exit:");
-        input.nextLine();
-        input.close();
+            System.out.println("Press enter to exit:");
+            input.nextLine();
+            input.close();
+            main.endgame();
 
 
 

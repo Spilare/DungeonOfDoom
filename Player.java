@@ -39,62 +39,92 @@ public class Player {
         return this.gold;
     }
 
-    void Move(char direction, Map map) {
+    void removexy() {
+        this.localex = -300;
+        this.localey = -300;
+        return;
+    }
+
+    void Move(char direction, Map map, int talk) {
 
         if (direction == 'S') {
             try {
                 if (map.GetLocale(this.localex, this.localey + 1) == '#') {
-                    System.out.println("Fail");
+                    if (talk == 1) {
+                        System.out.println("Fail");
+                    }
                 }
                 else {
                     this.localey = this.localey + 1;
-                    System.out.println("Success");
+                    if (talk == 1) {
+                        System.out.println("Success");
+                    }
                 }
             }
             catch (Exception StringIndexOutOfBoundsException) {
-                System.out.println("Fail");
+                if (talk == 1) {
+                    System.out.println("Fail");
+                }
             }
         }
         else if (direction == 'E') {
             try {
                 if (map.GetLocale(this.localex + 1, this.localey) == '#') {
-                    System.out.println("Fail");
+                    if (talk == 1) {
+                        System.out.println("Fail");
+                    }
                 }
                 else {
                     this.localex = this.localex + 1;
-                    System.out.println("Success");
+                    if (talk == 1) {
+                        System.out.println("Success");
+                    }
                 }
             }
             catch (Exception StringIndexOutOfBoundsException) {
-                System.out.println("Fail");
+                if (talk == 1) {
+                    System.out.println("Fail");
+                }
             }
         }
         else if (direction == 'N') {
             try {
                 if (map.GetLocale(this.localex, this.localey - 1) == '#') {
-                    System.out.println("Fail");
+                    if (talk == 1) {
+                        System.out.println("Fail");
+                    }
                 }
                 else {
                     this.localey = this.localey - 1;
-                    System.out.println("Success");
+                    if (talk == 1) {
+                        System.out.println("Success");
+                    }
                 }
             }
             catch (Exception StringIndexOutOfBoundsException) {
-                System.out.println("Fail");
+                if (talk == 1) {
+                    System.out.println("Fail");
+                }
             }
         }
         else if (direction == 'W') {
             try {
                 if (map.GetLocale(this.localex - 1, this.localey) == '#') {
-                    System.out.println("Fail");
+                    if (talk == 1) {
+                        System.out.println("Fail");
+                    }
                 }
                 else {
                     this.localex = this.localex - 1;
-                    System.out.println("Success");
+                    if (talk == 1) {
+                        System.out.println("Success");
+                    }
                 }
             }
             catch (Exception StringIndexOutOfBoundsException) {
-                System.out.println("Fail");
+                if (talk == 1) {
+                    System.out.println("Fail");
+                }
             }
         }
         else {
