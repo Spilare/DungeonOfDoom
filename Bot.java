@@ -7,6 +7,20 @@ public class Bot extends Player{
 
     public Bot(int type, int Leng, int Height, Map map, Player pc,Main main){
         super(map, Leng, Height);
+        if (super.GetLocalex() == pc.GetLocalex() && super.GetLocaley() == pc.GetLocaley()) {
+            if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                this.Move('N',map,0);
+            }
+            else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                this.Move('E',map,0);
+            }
+            else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                this.Move('S',map,0);
+            }
+            else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                this.Move('W',map,0);
+            }
+        }
         if (type == 9) {
             super.removexy();
         }
