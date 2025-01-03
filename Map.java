@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 
 
+
 public class Map {
 
     private String mapname;
@@ -15,7 +16,11 @@ public class Map {
 
     public Map(String mapnamein) throws FileNotFoundException {
         this.mapname = mapnamein;
-        File map = new File(mapnamein);
+        String filepath = new File(".").getAbsolutePath();
+        StringBuilder filepathbld = new StringBuilder(filepath);
+        filepathbld.deleteCharAt(filepath.length()-1);
+        filepath = filepathbld.toString();
+        File map = new File(filepath.concat(mapnamein));
         Scanner input = new Scanner(map);
         int i = 0;
         String name = input.nextLine();

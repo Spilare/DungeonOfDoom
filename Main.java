@@ -164,7 +164,7 @@ public class Main {
             
 
             while (main.getbool() == false) {
-                map1.PrintWholeMap(pc,bot);
+                //map1.PrintWholeMap(pc,bot);
                 String y = input.nextLine();
                 if (y.contentEquals("MOVE N") == true || y.contentEquals("MOVE W") == true || y.contentEquals("MOVE S") == true || y.contentEquals("MOVE E") == true) {
                     char z = y.charAt(5);
