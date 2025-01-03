@@ -20,8 +20,11 @@ public class Map {
         StringBuilder filepathbld = new StringBuilder(filepath);
         filepathbld.delete(filepath.length()-17,filepath.length());
         filepath = filepathbld.toString();
-        //String addition = "DoDmaps";
-        //filepath = filepath.concat(addition);
+        String addition = "DoDmaps";
+        filepath = filepath.concat(addition);
+        char slash = filepath.charAt(filepath.length()-18);
+        String slashs = "" + slash;
+        filepath = filepath.concat(slashs);
         File map = new File(filepath.concat(mapnamein));
         Scanner input = new Scanner(map);
         int i = 0;
