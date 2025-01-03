@@ -81,7 +81,13 @@ public class Map {
         String[] arr = this.Mapdetails;
         // int line = 32 * y;
         // int loc = line + x;
-        char info = arr[y].charAt(x);
+        char info;
+        try {
+            info = arr[y].charAt(x);
+        }
+        catch (StringIndexOutOfBoundsException e) {
+            info = '#';
+        }
         return info;
     }
     public void UpdateMap(int x, int y, char c){
@@ -92,9 +98,11 @@ public class Map {
         this.Mapdetails[y] = mp.toString();
         return;
     }
-    public void PrintWholeMap(Player pc){
+    public void PrintWholeMap(Player pc, Bot bot){
         int xloc = pc.GetLocalex();
         int yloc = pc.GetLocaley();
+        int xbot = bot.GetLocalex();
+        int ybot = bot.GetLocaley();
         // int line = 32 * yloc;
         // int loc = line + xloc;
         // StringBuilder mapstr = new StringBuilder(map);
@@ -102,12 +110,19 @@ public class Map {
         // map = mapstr.toString();
         String[] arr = this.Mapdetails;
         String place = arr[yloc];
+        String placebot = arr[ybot];
         StringBuilder mapstr = new StringBuilder(place);
+        StringBuilder mapstrbot = new StringBuilder(placebot);
         mapstr.setCharAt(xloc, 'P');
+        mapstrbot.setCharAt(xbot, 'B');
         place = mapstr.toString();
+        placebot = mapstrbot.toString();
         int i = 0;
         while (i < arr.length) {
-            if (i == yloc){
+            if (i == bot.GetLocaley()) {
+                System.out.println(placebot);
+            }
+            else if (i == yloc){
                 System.out.println(place);
             }
             else{

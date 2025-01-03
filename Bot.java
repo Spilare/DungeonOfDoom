@@ -64,6 +64,143 @@ public class Bot extends Player{
                 this.Move('W',map,0);
             }
         }
+        else if (this.type == 1) {
+            Random rand = new Random();
+
+            int direc = rand.nextInt(3);
+            if (pc.GetLocalex() >= (super.GetLocalex()-2) && pc.GetLocalex() <= (super.GetLocalex()+2) && pc.GetLocaley() >= (super.GetLocaley()-2) && pc.GetLocaley() <= (super.GetLocaley()+2)) {
+                if (pc.GetLocalex() < super.GetLocalex() && map.GetLocale(super.GetLocalex()-1, super.GetLocaley()) != '#') {
+                    this.Move('W',map,0);
+                }
+                else if (pc.GetLocalex() > super.GetLocalex() && map.GetLocale(super.GetLocalex()+1, super.GetLocaley()) != '#') {
+                    this.Move('E',map,0);
+                }
+                else if (pc.GetLocaley() < super.GetLocaley() && map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#' && pc.GetLocalex() == super.GetLocalex()) {
+                    this.Move('N',map,0);
+                }
+                else if (pc.GetLocaley() > super.GetLocaley() && map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#' && pc.GetLocalex() == super.GetLocalex()) {
+                    this.Move('N',map,0);
+                }
+                else {
+                    if (direc == 0) {
+                        if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                            this.Move('N',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                            this.Move('E',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                            this.Move('S',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                            this.Move('W',map,0);
+                        }
+                        
+                    }
+                    else if (direc == 1) {
+                        if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                            this.Move('E',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                            this.Move('S',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                            this.Move('W',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                            this.Move('N',map,0);
+                        }
+                    }
+                    else if (direc == 2) {
+                        if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                            this.Move('S',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                            this.Move('W',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                            this.Move('N',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                            this.Move('E',map,0);
+                        }
+                    }
+                    else if (direc == 3) {
+                        if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                            this.Move('W',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                            this.Move('N',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                            this.Move('E',map,0);
+                        }
+                        else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                            this.Move('S',map,0);
+                        }
+                    }
+                }
+            }
+            else {
+                if (direc == 0) {
+                    if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                        this.Move('N',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                        this.Move('E',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                        this.Move('S',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                        this.Move('W',map,0);
+                    }
+                    
+                }
+                else if (direc == 1) {
+                    if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                        this.Move('E',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                        this.Move('S',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                        this.Move('W',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                        this.Move('N',map,0);
+                    }
+                }
+                else if (direc == 2) {
+                    if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                        this.Move('S',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                        this.Move('W',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                        this.Move('N',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                        this.Move('E',map,0);
+                    }
+                }
+                else if (direc == 3) {
+                    if (map.GetLocale(super.GetLocalex() - 1, super.GetLocaley()) != '#'){
+                        this.Move('W',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()-1) != '#'){
+                        this.Move('N',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex() + 1, super.GetLocaley()) != '#'){
+                        this.Move('E',map,0);
+                    }
+                    else if (map.GetLocale(super.GetLocalex(), super.GetLocaley()+1) != '#'){
+                        this.Move('S',map,0);
+                    }
+                }
+            }
+        }
         return;
     }
 

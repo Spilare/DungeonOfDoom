@@ -140,10 +140,13 @@ public class Main {
                         System.out.println("Incorrect Input");
                     }
                 }
-                System.out.println("Bot on? Y or N");
+                System.out.println("Please choose a Bot difficulty, 0 = Random, 1 = Player follower, 9 = No bot:");
                 String boton = input.nextLine();
-                if (boton.charAt(0) == 'Y') {
+                if (boton.charAt(0) == '0') {
                     type = 0;
+                }
+                else if (boton.charAt(0) == '1') {
+                    type = 1;
                 }
                 else {
                     type = 9;
@@ -161,7 +164,7 @@ public class Main {
             
 
             while (main.getbool() == false) {
-                //map1.PrintWholeMap(pc); FOR TESTING
+                map1.PrintWholeMap(pc,bot);
                 String y = input.nextLine();
                 if (y.contentEquals("MOVE N") == true || y.contentEquals("MOVE W") == true || y.contentEquals("MOVE S") == true || y.contentEquals("MOVE E") == true) {
                     char z = y.charAt(5);
