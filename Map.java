@@ -14,8 +14,11 @@ public class Map {
     private int Height = 0;
     private boolean bool = false;
 
+
+    // Innit function that instantiates the map details into relative information
     public Map(String mapnamein) throws FileNotFoundException {
         this.mapname = mapnamein;
+        // Below is code to ensure the file path for maps is correct
         String filepath = new File("DungeonOfDoom.jar").getAbsolutePath();
         StringBuilder filepathbld = new StringBuilder(filepath);
         filepathbld.delete(filepath.length()-17,filepath.length());
@@ -27,8 +30,11 @@ public class Map {
         filepath = filepath.concat(slashs);
         File map = new File(filepath.concat(mapnamein));
         Scanner input = new Scanner(map);
+
+
         int i = 0;
         String name = input.nextLine();
+        // Collecting the first two input information of the map, ensures the map is correctly formatted
         if (name.contains("name") != true){
             System.out.println("Map incorrect format");
             input.close();
@@ -41,7 +47,6 @@ public class Map {
             input.close();
             return;
         }
-        //input.reset();
         try{
             this.Gold = input.nextInt();
         }
@@ -52,6 +57,7 @@ public class Map {
         }
         input.nextLine();
         String mapplace = "";
+        // This function collects all of the map into a single string with fake seperators that are taken away later
         while (input.hasNextLine()){
             String ln = input.nextLine();
             String sep = "/n";
@@ -62,12 +68,14 @@ public class Map {
             }
             i += 1;
         }
+        // below splits the map into its relative rows
         this.Mapdetails = mapplace.split("/n");
         this.Height = i;
         input.close();
         this.bool = true;
         return;
     }
+
     public String[] GetMap() {
         return this.Mapdetails;
     }
@@ -86,11 +94,12 @@ public class Map {
     public int GetGold(){
         return this.Gold;
     }
+
+
     // y starts at 0
+    // function below returns the feature at a specific location, if it does not exist then it is a wall
     public char GetLocale(int x, int y) {
         String[] arr = this.Mapdetails;
-        // int line = 32 * y;
-        // int loc = line + x;
         char info;
         try {
             info = arr[y].charAt(x);
@@ -100,6 +109,8 @@ public class Map {
         }
         return info;
     }
+
+    // function to be able to update map location, this is used to place the bot at specific locations as needed
     public void UpdateMap(int x, int y, char c){
         
         String[] arr = this.Mapdetails;
@@ -108,16 +119,14 @@ public class Map {
         this.Mapdetails[y] = mp.toString();
         return;
     }
+
+    // This function was used during testing to ensure everything is properly placed
     public void PrintWholeMap(Player pc, Bot bot){
         int xloc = pc.GetLocalex();
         int yloc = pc.GetLocaley();
         int xbot = bot.GetLocalex();
         int ybot = bot.GetLocaley();
-        // int line = 32 * yloc;
-        // int loc = line + xloc;
-        // StringBuilder mapstr = new StringBuilder(map);
-        // mapstr.setCharAt(loc, 'P');
-        // map = mapstr.toString();
+        // below is the code to place the player and bot into the map
         String[] arr = this.Mapdetails;
         String place = arr[yloc];
         String placebot = arr[ybot];
@@ -127,6 +136,7 @@ public class Map {
         mapstrbot.setCharAt(xbot, 'B');
         place = mapstr.toString();
         placebot = mapstrbot.toString();
+        
         int i = 0;
         while (i < arr.length) {
             if (i == bot.GetLocaley()) {
