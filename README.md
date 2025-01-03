@@ -54,5 +54,5 @@ the first line of # specifies the player spawn radius, the player will randomly 
 The map does not need to be rectangular it can be of any shape, blank spaces are treated as walls
 
 
-For this project I have implemented many elements of Object Oriented Program, I have seperated classes for the Map, Player and Bot along with a class for the Main file which implements all the game logic. The Bot class is extended from the Player due to many similar actions between the two classes.
+For this project I have implemented many elements of Object Oriented Program, I have seperated classes for the Map, Player and Bot along with a class for the Main file which implements all the game logic. The Bot class is extended from the Player due to many similar actions between the two classes. These have all been implemented in ways that allow for easy additions to the code, such as finding locations in the map class.
 
