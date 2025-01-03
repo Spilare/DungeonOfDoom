@@ -20,6 +20,8 @@ public class Map {
         StringBuilder filepathbld = new StringBuilder(filepath);
         filepathbld.deleteCharAt(filepath.length()-1);
         filepath = filepathbld.toString();
+        String addition = "DoDmaps";
+        filepath = filepath.concat(addition);
         File map = new File(filepath.concat(mapnamein));
         Scanner input = new Scanner(map);
         int i = 0;
