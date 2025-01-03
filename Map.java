@@ -16,12 +16,12 @@ public class Map {
 
     public Map(String mapnamein) throws FileNotFoundException {
         this.mapname = mapnamein;
-        String filepath = new File(".").getAbsolutePath();
+        String filepath = new File("DungeonOfDoom.jar").getAbsolutePath();
         StringBuilder filepathbld = new StringBuilder(filepath);
-        filepathbld.deleteCharAt(filepath.length()-1);
+        filepathbld.delete(filepath.length()-17,filepath.length());
         filepath = filepathbld.toString();
-        String addition = "DoDmaps";
-        filepath = filepath.concat(addition);
+        //String addition = "DoDmaps";
+        //filepath = filepath.concat(addition);
         File map = new File(filepath.concat(mapnamein));
         Scanner input = new Scanner(map);
         int i = 0;
