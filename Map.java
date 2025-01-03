@@ -22,7 +22,7 @@ public class Map {
         filepath = filepathbld.toString();
         String addition = "DoDmaps";
         filepath = filepath.concat(addition);
-        char slash = filepath.charAt(filepath.length()-18);
+        char slash = filepath.charAt(filepath.length()-8);
         String slashs = "" + slash;
         filepath = filepath.concat(slashs);
         File map = new File(filepath.concat(mapnamein));
